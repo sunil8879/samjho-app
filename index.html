@@ -122124,25 +122124,46 @@ function startLearning() {
 
 
 function renderQuiz(topicKey) {
-    const data = managementDatabase[topicKey];
     const container = document.getElementById('quizContainer');
-    if (!data || !data.quiz) return;
-    
+    if (!container) return;
+
+    // 1. Look for the quiz in the Technical Database (where the 20 questions are)
+    let techQuiz = (managementDatabase[topicKey] && managementDatabase[topicKey].quiz) ? managementDatabase[topicKey].quiz : [];
+
+    // 2. Look for the quiz in the Bilingual Database (where the 2 sample questions are)
+    let langQuiz = [];
+    if (topicData[currentLanguage] && topicData[currentLanguage][topicKey] && topicData[currentLanguage][topicKey].quiz) {
+        langQuiz = topicData[currentLanguage][topicKey].quiz;
+    }
+
+    // 3. SMART SEARCH: Use the one that has MORE questions
+    // This ensures that if managementDatabase has 20 and topicData has 2, it picks the 20.
+    let finalQuiz = techQuiz.length >= langQuiz.length ? techQuiz : langQuiz;
+
+    if (finalQuiz.length === 0) {
+        container.innerHTML = '<p style="padding:20px;">Quiz questions are being updated for this module...</p>';
+        return;
+    }
+
+    // 4. RENDER ALL QUESTIONS
     container.innerHTML = '';
-    data.quiz.forEach((item, i) => {
+    finalQuiz.forEach((item, i) => {
         const div = document.createElement('div');
-        div.style = "margin-bottom:25px; padding:15px; background:white; border-radius:10px; border:1px solid #eee;";
+        div.className = 'quiz-item';
+        // Improved styling so 20 questions look organized
+        div.style = "margin-bottom:30px; padding:20px; background:white; border-radius:12px; border:1px solid #e0e0e0; text-align:left; box-shadow: 0 2px 5px rgba(0,0,0,0.05);";
         div.innerHTML = `
-            <p style="font-weight:bold; color:#2e7d32; margin-bottom:10px;">Q${i+1}: ${item.q}</p>
-            <div style="margin-bottom:10px;">
+            <p style="font-weight:800; font-size:1.1rem; color:#2e7d32; margin-bottom:15px;">Q${i+1}: ${item.q}</p>
+            <div style="margin-bottom:15px;">
                 ${item.options.map((opt, idx) => `
-                    <label style="display:block; margin-bottom:5px;">
-                        <input type="radio" name="q${i}"> ${opt}
+                    <label style="display:block; margin-bottom:10px; padding:12px; background:#f9f9f9; border-radius:8px; cursor:pointer; border:1px solid #eee; transition: 0.2s;">
+                        <input type="radio" name="q${i}" style="margin-right:10px;"> ${opt}
                     </label>`).join('')}
             </div>
-            <button class="ans-btn" style="font-size:0.8rem; padding:4px 10px;" onclick="this.nextElementSibling.style.display='block'">Show Answer</button>
-            <div style="display:none; margin-top:10px; color:#1877f2; font-weight:bold;">
-                Correct Answer: ${item.options[item.a]}
+            <button class="ans-btn" style="background:#2e7d32; color:white; border:none; padding:8px 15px; border-radius:5px; cursor:pointer; font-weight:bold;" 
+                    onclick="this.nextElementSibling.style.display='block'">Check Correct Answer</button>
+            <div class="hidden-ans" style="display:none; margin-top:15px; color:#1877f2; font-weight:bold; padding:12px; background:#e3f2fd; border-radius:8px; border-left:5px solid #1877f2;">
+                <i class="fa-solid fa-check-circle"></i> Correct Answer: ${item.options[item.a]}
             </div>
         `;
         container.appendChild(div);
