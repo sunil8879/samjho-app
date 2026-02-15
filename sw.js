@@ -1,11 +1,11 @@
 const cacheName = 'samjho-v1';
 const staticAssets = [
-  './',
-  './index.html',
-  './SAMJHO.mp4',
-  './tap.png',
-  './icon-192.png',
-  './icon-512.png'
+  '/',
+  '/index.html',
+  '/SAMJHO.mp4',
+  '/tap.png',
+  '/icon-192.png',
+  '/icon-512.png'
 ];
 
 self.addEventListener('install', async el => {
