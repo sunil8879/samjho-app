@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Statement - SAMJHO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --cyan: #00f2fe; --bg: #05080a; --glass: rgba(255, 255, 255, 0.03); }
+        body { background: var(--bg); color: #fff; font-family: 'Outfit', sans-serif; margin: 0; line-height: 1.6; }
+        
+        /* Animated Background Glow */
+        .bg-glow { 
+            position: fixed; 
+            width: 600px; 
+            height: 600px; 
+            background: radial-gradient(circle, rgba(0,242,254,0.08) 0%, transparent 70%); 
+            z-index: -1; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            animation: pulse 8s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            to { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
+
+        .container { 
+            max-width: 800px; 
+            margin: 60px auto; 
+            padding: 50px; 
+            background: var(--glass); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 40px; 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6); 
+        }
+
+        h1 { 
+            font-size: 3.2rem; 
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #fff, var(--cyan)); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+
+        .tagline { 
+            color: var(--cyan); 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            letter-spacing: 3px; 
+            font-size: 0.85rem; 
+            margin-bottom: 30px; 
+            display: block; 
+        }
+
+        p { margin-bottom: 22px; color: #b0b0b0; text-align: justify; font-size: 1.05rem; }
+        
+        .no-data-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid var(--cyan);
+            border-radius: 50px;
+            color: var(--cyan);
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .footer { 
+            margin-top: 50px; 
+            text-align: center; 
+            font-size: 0.8rem; 
+            opacity: 0.4; 
+            letter-spacing: 1px;
+        }
+
+        strong { color: #fff; }
+
+        @media (max-width: 768px) {
+            .container { margin: 20px; padding: 30px; }
+            h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <div class="container">
+        <span class="tagline">Privacy First Architecture</span>
+        <div class="no-data-badge">NO LOGIN REQUIRED</div>
+        <h1>Privacy Statement</h1>
+        
+        <p>At <strong>SAMJHO</strong>, we believe that the right to information should not come at the cost of your personal privacy. Unlike most financial education platforms, <strong>SAMJHO does not require a login, registration, or any form of personal identification.</strong> You are free to explore the "Dark Realities" of the banking system with total anonymity.</p>
+        
+        <p><strong>What We (Don't) Collect:</strong> Since there is no account creation, we do not maintain a central database of our users. We do not know who you are. We may collect minimal, non-identifiable technical data—such as your device type and app interaction patterns—purely to optimize our content. This data cannot be traced back to any individual.</p>
+
+        <p><strong>Data Integrity:</strong> Even without personal data collection, we adhere to the principles of the <strong>DPDP Act of India.</strong> Our "Zero-Data Footprint" ensures there is no information on our servers to compromise. We do not use cross-site tracking cookies, nor do we sell user behavior to the institutions we expose.</p>
+
+        <p><strong>Your Experience:</strong> Any preferences or "Saved Shorts" are stored locally on your device. By using SAMJHO, you acknowledge that you are accessing a platform built on trust. We are here to give you the truth about the system—without tracking your every move. <strong>Your privacy is our mission.</strong></p>
+        
+        <div class="footer">
+            &copy; 2026 SAMJHO APP &bull; ANONYMOUS & SECURE &bull; NO-DATA LOGGING POLICY
+        </div>
+    </div>
+</body>
+</html>
