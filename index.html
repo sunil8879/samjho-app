@@ -123520,44 +123520,44 @@ function changeShortsPage(direction) {
     // Scroll to top of grid for better UX
     document.getElementById('mainDisplay').scrollIntoView({ behavior: 'smooth' });
 }
-// Register Service Worker
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-}
 
-// PWA Install Logic
-let deferredPrompt;
-const installBtn = document.getElementById('pwa-install-btn');
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent Chrome 67 and earlier from automatically showing the prompt
-    e.preventDefault();
-    // Stash the event so it can be triggered later.
-    deferredPrompt = e;
-    // Show the floating install button
-    installBtn.style.display = 'flex';
-
-    installBtn.addEventListener('click', () => {
-        // Show the install prompt
-        deferredPrompt.prompt();
-        // Wait for the user to respond to the prompt
-        deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted the install prompt');
-            }
-            installBtn.style.display = 'none';
-            deferredPrompt = null;
-        });
-    });
-});
-
-// Hide button if app is already installed
-window.addEventListener('appinstalled', () => {
-    installBtn.style.display = 'none';
-});
 </script>
 <button id="pwa-install-btn">
     <i class="fa-solid fa-download"></i> INSTALL APP
 </button>
+
+<script>
+        // 1. Register the Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+            .then(() => console.log("Service Worker Registered"));
+        }
+
+        // 2. Handle the Install Logic
+        let deferredPrompt;
+        const installBtn = document.getElementById('pwa-install-btn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('Install prompt is ready to show');
+            e.preventDefault(); // Stop the default mini-bar
+            deferredPrompt = e;  // Save the event
+            installBtn.style.display = 'block'; // Show our custom button
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt(); // Show the browser install dialog
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response: ${outcome}`);
+                deferredPrompt = null;
+                installBtn.style.display = 'none';
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            console.log('App was installed');
+            installBtn.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
